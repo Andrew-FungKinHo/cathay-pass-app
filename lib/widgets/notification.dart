@@ -58,12 +58,12 @@ class NotificationsPopUp extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ReselectPage(),
-                  ),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => ReselectPage(),
+                //   ),
+                // );
               },
               child: Container(
                 //width: SizeConfig.screenWidth*0.8-32,

@@ -33,7 +33,7 @@ class _SubscriptionPlansState extends State<SubscriptionPage> {
         decoration: BoxDecoration(
           color: Colors.black87,
           image: DecorationImage(
-            image: AssetImage("assets/images/cathay.jpg"),
+            image: AssetImage("assets/images/wallpaper.jpeg"),
             fit: BoxFit.cover,
             colorFilter: new ColorFilter.mode(
                 Colors.white.withOpacity(0.5), BlendMode.dstATop),
@@ -314,7 +314,7 @@ class _SubscriptionPlansState extends State<SubscriptionPage> {
         destination: 'Popular Asian destinations',
         hotelPackage: '5-star hotel package',
         insurance: 'Standard insurance plan',
-        selectedPlan: true,
+        selectedPlan: false,
         color: AppColors.premiumEconClassColor),
     Plan(
         planName: 'Business',

@@ -55,7 +55,7 @@ class _DatePickerState extends State<DatePicker> {
                   ),
                 ),
               ),
-          separatorBuilder: (_, index) => SizedBox(width: 5),
+          separatorBuilder: (_, index) => SizedBox(width: 60),
           itemCount: weekList.length),
     );
   }

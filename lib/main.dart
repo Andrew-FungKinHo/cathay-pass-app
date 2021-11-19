@@ -1,4 +1,5 @@
 import 'package:cathay_pass_app/models/navitem.dart';
+import 'package:cathay_pass_app/screens/Subscription/subscriptionpage.dart';
 import 'package:flutter/material.dart';
 import 'constants/constants.dart';
 import 'package:provider/provider.dart';
@@ -70,10 +71,10 @@ class CathayPassApp extends StatelessWidget {
       },
       {
         'time': '11:00 pm',
-        'title': 'Namdaemun Night Market',
+        'title': 'Yeouido World Night Market',
         'slot': '11:00 - 12:00 am',
-        'tlColor': AppColors.fadewhite,
-        'bgColor': AppColors.fadewhite.withOpacity(0.25),
+        'tlColor': AppColors.green,
+        'bgColor': AppColors.green.withOpacity(0.6),
         'isHighRisk': true,
       },
     ],
@@ -97,7 +98,7 @@ class CathayPassApp extends StatelessWidget {
       ),
       // home: MenuScreen(),
       // home: SubscriptionPage(),
-      home: CalendarPage(task),
+      home: SubscriptionPage(),
     );
   }
 }

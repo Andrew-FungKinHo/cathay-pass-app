@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'dart:core';
 import 'dart:convert';
 
-var cbsa = 36260; // add this line
+// var cbsa = 36260; // add this line
 
 class TaskTimeline extends StatelessWidget {
   final Map<String, dynamic> detail;
@@ -15,12 +15,21 @@ class TaskTimeline extends StatelessWidget {
 
   // start code here
 
-  final String url = "https://api.covidactnow.org/v2/cbsa/" +
-      cbsa.toString() +
-      ".json?apiKey=69ed0fe788624a5c95e562a12315a20b";
+  final url_des1 =
+      "https://api.covidactnow.org/v2/cbsa/36260.json?apiKey=69ed0fe788624a5c95e562a12315a20b";
+  // link 2: risk 5
+  final url_des2 =
+      "https://api.covidactnow.org/v2/county/23007.json?apiKey=69ed0fe788624a5c95e562a12315a20b";
 
-  Future<placeRisk> getJsonData() async {
-    var response = await http.get(Uri.parse(url)); // Uri.encodeFull(url)
+  Future<placeRisk> getJsonData(String callURL, String title) async {
+    // ADD: use which link depends on which title( the place)
+    if (title == 'Namdaemun Night Market') {
+      callURL = url_des1;
+    } else if (title == 'Yeouido World Night Market') {
+      callURL = url_des2;
+    }
+
+    var response = await http.get(Uri.parse(callURL)); // Uri.encodeFull(url)
     if (response.statusCode == 200) {
       final convertDataJSON = jsonDecode(response.body);
       return placeRisk.fromJson(convertDataJSON);
@@ -31,7 +40,7 @@ class TaskTimeline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    this.getJsonData();
+    // this.getJsonData();
     return Container(
       color: Colors.white,
       padding: EdgeInsets.symmetric(horizontal: 15),
@@ -61,6 +70,9 @@ class TaskTimeline extends StatelessWidget {
   }
 
   Widget _buildCard(Color bgColor, String title, String slot, bool isHighRisk) {
+    String passURL = url_des1; // default use lin 1
+    this.getJsonData(passURL, title);
+
     return Container(
       width: 250,
       decoration: BoxDecoration(
@@ -113,7 +125,10 @@ class TaskTimeline extends StatelessWidget {
                       color: Colors.red,
                     ),
                     FutureBuilder(
-                      future: getJsonData(),
+                      future:
+                          // default send url_des1
+                          // pass the title as well
+                          getJsonData(url_des1, title),
                       builder: (BuildContext context, SnapShot) {
                         // SnapShot can be changed
                         if (SnapShot.hasData) {
@@ -122,7 +137,7 @@ class TaskTimeline extends StatelessWidget {
                             children: <Widget>[
                               Container(
                                 constraints:
-                                    BoxConstraints(maxHeight: 30, maxWidth: 30),
+                                    BoxConstraints(maxHeight: 35, maxWidth: 35),
                                 child: riskLevelPointer(
                                   covid.riskLevel.toString(),
                                 ),

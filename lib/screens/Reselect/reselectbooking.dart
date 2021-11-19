@@ -3,31 +3,27 @@ import 'package:cathay_pass_app/components/customappbar.dart';
 import 'package:cathay_pass_app/constants/constants.dart';
 import 'package:cathay_pass_app/models/flightinfo.dart';
 import 'package:cathay_pass_app/models/hotelinfo.dart';
-import 'package:cathay_pass_app/models/task.dart';
-import 'package:cathay_pass_app/screens/Menu/menupage.dart';
-import 'package:cathay_pass_app/screens/TripPlanner/calendarpage.dart';
+import 'package:cathay_pass_app/screens/Booking/components/flightSelection.dart';
+import 'package:cathay_pass_app/screens/Booking/components/hotelselection.dart';
+import 'package:cathay_pass_app/screens/Booking/components/selectionprovider.dart';
 import 'package:cathay_pass_app/widgets/checkbox.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import 'components/flightSelection.dart';
-import 'components/hotelselection.dart';
-import 'components/selectionprovider.dart';
-
-class BookScreen extends StatefulWidget {
+class ReselectBookScreen extends StatefulWidget {
   DateTimeRange _dateRange;
   String _destination;
 
-  BookScreen({DateTimeRange dateRange, String destination})
+  ReselectBookScreen({DateTimeRange dateRange, String destination})
       : _dateRange = dateRange,
         _destination = destination;
 
   @override
-  _BookScreenState createState() => _BookScreenState();
+  _ReselectBookScreenState createState() => _ReselectBookScreenState();
 }
 
-class _BookScreenState extends State<BookScreen> {
+class _ReselectBookScreenState extends State<ReselectBookScreen> {
   static DateFormat dateFormatEn = DateFormat('dd MMM');
 
   @override
@@ -191,7 +187,7 @@ SliverToBoxAdapter _buildTicket(
             child: Padding(
               padding: EdgeInsets.only(left: 8),
               child: Text(
-                'Recommended for you:',
+                'Recommended changes:',
                 style: const TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.w600,
@@ -207,37 +203,43 @@ SliverToBoxAdapter _buildTicket(
             child: Column(
               children: <Widget>[
                 Center(
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: Colors.green.shade50,
-                          borderRadius: BorderRadius.circular(20),
+                    child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: Colors.green.shade50,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Icon(Icons.flight_takeoff,
+                              color: AppColors.kTextLigntColor),
                         ),
-                        child: Icon(Icons.flight_takeoff,
-                            color: AppColors.kTextLigntColor),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        "Outbound Flight",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.dark,
+                        SizedBox(
+                          width: 10,
                         ),
-                      ),
-                    ],
-                  ),
-                ),
+                        Text(
+                          "Outbound Flight",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.dark,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Icon(
+                      Icons.warning_rounded,
+                      color: Color(0xFFFD2F22),
+                    ),
+                  ],
+                )),
                 Row(
                   children: <Widget>[
                     Text(
-                      flightListOutbound[
-                              selectionProvider.getIndex('outboundFlight')]
-                          .flightFrom,
+                      flightListOutbound[1].flightFrom,
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -323,9 +325,7 @@ SliverToBoxAdapter _buildTicket(
                       width: 16,
                     ),
                     Text(
-                      flightListOutbound[
-                              selectionProvider.getIndex('outboundFlight')]
-                          .flightTo,
+                      flightListOutbound[1].flightTo,
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -342,15 +342,11 @@ SliverToBoxAdapter _buildTicket(
                     SizedBox(
                         width: 100,
                         child: Text(
-                          flightListOutbound[
-                                  selectionProvider.getIndex('outboundFlight')]
-                              .flightFromCity,
+                          flightListOutbound[1].flightFromCity,
                           style: TextStyle(fontSize: 12, color: Colors.grey),
                         )),
                     Text(
-                      flightListOutbound[
-                              selectionProvider.getIndex('outboundFlight')]
-                          .duration,
+                      flightListOutbound[1].duration,
                       style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.bold,
@@ -359,9 +355,7 @@ SliverToBoxAdapter _buildTicket(
                     SizedBox(
                         width: 100,
                         child: Text(
-                          flightListOutbound[
-                                  selectionProvider.getIndex('outboundFlight')]
-                              .flightToCity,
+                          flightListOutbound[1].flightToCity,
                           textAlign: TextAlign.end,
                           style: TextStyle(fontSize: 12, color: Colors.grey),
                         )),
@@ -374,18 +368,14 @@ SliverToBoxAdapter _buildTicket(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                      flightListOutbound[
-                              selectionProvider.getIndex('outboundFlight')]
-                          .takeOffTime,
+                      flightListOutbound[1].takeOffTime,
                       style: TextStyle(
                           fontSize: 18,
                           color: AppColors.dark,
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      flightListOutbound[
-                              selectionProvider.getIndex('outboundFlight')]
-                          .landingTime,
+                      flightListOutbound[1].landingTime,
                       style: TextStyle(
                           fontSize: 18,
                           color: AppColors.dark,
@@ -408,9 +398,7 @@ SliverToBoxAdapter _buildTicket(
                           style: TextStyle(fontSize: 12, color: Colors.grey),
                         ),
                         Text(
-                          flightListOutbound[
-                                  selectionProvider.getIndex('outboundFlight')]
-                              .flightNumber,
+                          flightListOutbound[1].flightNumber,
                           style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
@@ -932,71 +920,6 @@ SliverToBoxAdapter _buildTicket(
             ),
             onPressed: () {
               Navigator.pop(context);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => CalendarPage(
-                    Task(
-                      iconData: Icon(Icons.travel_explore),
-                      title: 'Personal',
-                      bgColor: Colors.purple,
-                      iconColor: Colors.orange,
-                      btnColor: Colors.yellow,
-                      left: 3,
-                      done: 1,
-                      desc: [
-                        {
-                          'time': '6:00 pm',
-                          'title': 'Flight CX418 Arrive at ICN Airport',
-                          'slot': '6:05 - 7:00 pm',
-                          'tlColor': AppColors.green,
-                          'bgColor': AppColors.green.withOpacity(0.6),
-                          'isHighRisk': false,
-                        },
-                        {
-                          'time': '7:00 pm',
-                          'title': 'Dinner',
-                          'slot': '7:00 - 8:00 pm',
-                          'tlColor': AppColors.fadewhite,
-                          'bgColor': AppColors.fadewhite.withOpacity(0.25),
-                          'isHighRisk': false,
-                        },
-                        {
-                          'time': '8:00 pm',
-                          'title': 'Travel to Hotel Cappuccino',
-                          'slot': '8:00 - 9:00 pm',
-                          'tlColor': AppColors.green,
-                          'bgColor': AppColors.green.withOpacity(0.6),
-                          'isHighRisk': false,
-                        },
-                        {
-                          'time': '9:00 pm',
-                          'title': '',
-                          'slot': '',
-                          'tlColor': AppColors.fadewhite,
-                          'isHighRisk': false,
-                        },
-                        {
-                          'time': '10:00 pm',
-                          'title': 'Namdaemun Night Market',
-                          'slot': '10:00 - 11:00 pm',
-                          'tlColor': AppColors.fadewhite,
-                          'bgColor': AppColors.fadewhite.withOpacity(0.25),
-                          'isHighRisk': true,
-                        },
-                        {
-                          'time': '11:00 pm',
-                          'title': 'Yeouido World Night Market',
-                          'slot': '11:00 - 12:00 am',
-                          'tlColor': AppColors.green,
-                          'bgColor': AppColors.green.withOpacity(0.6),
-                          'isHighRisk': true,
-                        },
-                      ],
-                    ),
-                  ),
-                ),
-              );
             },
             color: AppColors.kPrimaryColor,
             shape: RoundedRectangleBorder(

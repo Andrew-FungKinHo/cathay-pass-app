@@ -10,33 +10,39 @@ class TripCard extends StatefulWidget {
   List<String> _destinationList;
   String _warning;
   bool _plannedTrip;
-  TripCard({
-    String tripNumber,
-    String destination,
-    List<String> destinationList,
-    String warning,
-    bool plannedTrip,
-  })  : _tripNumber = tripNumber,
+  Function _callback;
+  Function _callbackWarning;
+
+  TripCard(
+      {String tripNumber,
+      String destination,
+      List<String> destinationList,
+      String warning,
+      bool plannedTrip,
+      Function callback,
+      Function callbackWarning})
+      : _tripNumber = tripNumber,
         _destination = destination,
         _destinationList = destinationList,
         _warning = warning,
-        _plannedTrip = plannedTrip;
+        _plannedTrip = plannedTrip,
+        _callback = callback,
+        _callbackWarning = callbackWarning;
 
   @override
   _TripCardState createState() => _TripCardState();
 }
 
 class _TripCardState extends State<TripCard> {
-  DateTimeRange initialDateRange = DateTimeRange(
-      start: DateTime(
-          DateTime.now().year, DateTime.now().month, DateTime.now().day + 7),
-      end: DateTime(
-          DateTime.now().year, DateTime.now().month, DateTime.now().day + 14));
+  //DateTimeRange initialDateRange = DateTimeRange(start: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day+7), end: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day+14));
   DateTimeRange pickedDateRange;
   static DateFormat dateFormatEn = DateFormat('dd MMM');
 
   @override
   Widget build(BuildContext context) {
+    if (widget._destination == null) widget._destination = 'Tokyo';
+    if (widget._warning == null) widget._warning = '';
+    if (widget._plannedTrip == null) widget._plannedTrip = false;
     return Container(
         //width: SizeConfig.screenWidth*0.9,
         height: widget._warning == '' ? 180 : 200,
@@ -91,21 +97,24 @@ class _TripCardState extends State<TripCard> {
                 Container(
                   width: 36,
                   child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => BookScreen(
-                            dateRange: pickedDateRange,
-                          ),
-                        ),
-                      );
-                    },
-                    child: Icon(
-                      Icons.edit,
-                      color: Colors.white,
-                    ),
-                  ),
+                      onPressed: () {
+                        if (widget._destination != null &&
+                            pickedDateRange != null) {
+                          Future.delayed(Duration(seconds: 1), () {
+                            if (widget._callback != null) widget._callback();
+                          });
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => BookScreen(
+                                        dateRange: pickedDateRange,
+                                      )));
+                        }
+                      },
+                      child: Icon(
+                        Icons.edit,
+                        color: Colors.white,
+                      )),
                 )
                 /*Container(
                   height: 48,
@@ -120,32 +129,36 @@ class _TripCardState extends State<TripCard> {
             ),
             if (widget._warning != '')
               GestureDetector(
-                onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ReselectPage())),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              ReselectPage(widget._callbackWarning)));
+                },
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                  width: 180,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: Color(0xFFFD2F22)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Icon(
-                        Icons.warning_rounded,
-                        color: Colors.white,
-                        size: 16,
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Text(
-                        widget._warning,
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    width: 180,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: Color(0xFFFD2F22)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(
+                          Icons.warning_rounded,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Text(
+                          widget._warning,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    )),
               ),
             SizedBox(
               height: 16,
@@ -195,9 +208,6 @@ class _TripCardState extends State<TripCard> {
                                   setState(
                                     () => widget._destination = val,
                                   );
-                                  setState(() {
-                                    widget._plannedTrip = true;
-                                  });
                                 },
                               ),
                             ))
@@ -233,8 +243,11 @@ class _TripCardState extends State<TripCard> {
                           pickedDateRange != null
                               ? Text(
                                   '${dateFormatEn.format(pickedDateRange.start)} - ${dateFormatEn.format(pickedDateRange.end)}')
-                              : Text(
-                                  '${dateFormatEn.format(initialDateRange.start)} - ${dateFormatEn.format(initialDateRange.end)}'),
+                              : SizedBox(
+                                  width: 64,
+                                ),
+                          // pickedDateRange!=null ? Text('${dateFormatEn.format(pickedDateRange.start)} - ${dateFormatEn.format(pickedDateRange.end)}') :
+                          //Text('${dateFormatEn.format(initialDateRange.start)} - ${dateFormatEn.format(initialDateRange.end)}'),
                           Container(
                               width: 32,
                               height: 40,
@@ -260,11 +273,7 @@ class _TripCardState extends State<TripCard> {
   dateTimeRangePicker() async {
     pickedDateRange = await showDateRangePicker(
         context: context,
-        initialDateRange: DateTimeRange(
-            start: DateTime(DateTime.now().year, DateTime.now().month,
-                DateTime.now().day + 7),
-            end: DateTime(DateTime.now().year, DateTime.now().month,
-                DateTime.now().day + 14)),
+        //initialDateRange: DateTimeRange(start: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day+7), end: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day+14)),
         firstDate: DateTime(
             DateTime.now().year, DateTime.now().month, DateTime.now().day),
         lastDate: DateTime.utc(2022, 12, 31),

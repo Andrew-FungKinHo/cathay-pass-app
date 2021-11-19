@@ -2,10 +2,14 @@ import 'package:cathay_pass_app/components/bottomnavbar.dart';
 import 'package:cathay_pass_app/components/customappbar.dart';
 import 'package:cathay_pass_app/constants/constants.dart';
 import 'package:cathay_pass_app/screens/Booking/bookingpage.dart';
+import 'package:cathay_pass_app/screens/Reselect/reselectbooking.dart';
 import 'package:flutter/material.dart';
 
 class ReselectPage extends StatelessWidget {
-  const ReselectPage({Key key}) : super(key: key);
+  Function callbackWarning;
+
+  ReselectPage(this.callbackWarning);
+  // const ReselectPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -304,12 +308,12 @@ class ReselectPage extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
+                  this.callbackWarning();
+                  Navigator.pop(context);
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BookScreen(),
-                    ),
-                  );
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ReselectBookScreen()));
                 },
               ),
             ),
