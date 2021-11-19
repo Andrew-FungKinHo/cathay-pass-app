@@ -1,6 +1,7 @@
 import 'package:cathay_pass_app/components/bottomnavbar.dart';
 import 'package:cathay_pass_app/components/customappbar.dart';
 import 'package:cathay_pass_app/constants/constants.dart';
+import 'package:cathay_pass_app/screens/Booking/bookingpage.dart';
 import 'package:flutter/material.dart';
 
 class ReselectPage extends StatelessWidget {
@@ -303,12 +304,12 @@ class ReselectPage extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => BookScreen(),
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BookScreen(),
+                    ),
+                  );
                 },
               ),
             ),

@@ -1,3 +1,4 @@
+import 'package:cathay_pass_app/constants/sizeconfig.dart';
 import 'package:cathay_pass_app/screens/Reselect/reselectpage.dart';
 import 'package:flutter/material.dart';
 
@@ -12,8 +13,9 @@ class NotificationsPopUp extends StatelessWidget {
       backgroundColor: Colors.transparent,
       child: Container(
         padding: EdgeInsets.all(16),
-        // width: SizeConfig.screenWidth*0.8,
-        // height: SizeConfig.screenHeight*0.85,
+        width: MediaQuery.of(context).size.width * 0.9,
+        height: MediaQuery.of(context).size.height * 0.5,
+        // height: SizeConfig.screenHeight * 0.85,
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.8),
           borderRadius: BorderRadius.circular(8),
@@ -56,8 +58,12 @@ class NotificationsPopUp extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ReselectPage()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ReselectPage(),
+                  ),
+                );
               },
               child: Container(
                 //width: SizeConfig.screenWidth*0.8-32,
@@ -92,10 +98,14 @@ class NotificationsPopUp extends StatelessWidget {
               ),
             ),
             Expanded(
-                child: SizedBox(
-              height: 64,
-            )),
-            TextButton(onPressed: () {}, child: Text('Clear'))
+              child: SizedBox(
+                height: 64,
+              ),
+            ),
+            TextButton(
+              onPressed: () {},
+              child: Text('Clear'),
+            )
           ],
         ),
       ),
