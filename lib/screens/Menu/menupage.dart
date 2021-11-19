@@ -77,73 +77,74 @@ class _MenuScreenState extends State<MenuScreen> {
   SliverToBoxAdapter _buildPreventionTips(double screenHeight) {
     return SliverToBoxAdapter(
       child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
-          child: Column(
-            children: [
-              // Expanded(
-              //   child: ListView.builder(
-              //     itemCount: tripList.length,
-              //       itemBuilder: (context, index) {
-              //         return TripCard(
-              //           tripNumber: tripList[index].tripNumber,
-              //           destination: tripList[index].destination,
-              //           destinationList: tripList[index].destinationList,
-              //           warning: tripList[index].warning,
-              //           plannedTrip: tripList[index].plannedTrip,
-              //         );
-              //       }
-              //   ),
-              // ),
-              TripCard(
-                  tripNumber: 'Trip 1',
-                  destination: destination,
-                  destinationList: [
-                    'Seoul',
-                    'Busan',
-                    'Tokyo',
-                    'Singapore',
-                    'Bangkok',
-                    'Sydney (+HKD1,000)',
-                    'Paris (+HKD2,000)'
-                  ],
-                  warning: 'Reschedule needed',
-                  plannedTrip: false),
-              SizedBox(
-                height: 32,
-              ),
-              TripCard(
-                  tripNumber: 'Trip 2',
-                  destination: destination,
-                  destinationList: [
-                    'Seoul',
-                    'Busan',
-                    'Tokyo',
-                    'Singapore',
-                    'Bangkok',
-                    'Sydney (+HKD1,000)',
-                    'Paris (+HKD2,000)'
-                  ],
-                  warning: '',
-                  plannedTrip: false),
-              SizedBox(
-                height: 32,
-              ),
-              TripCard(
-                  tripNumber: 'Trip 3',
-                  destination: destination,
-                  destinationList: [
-                    'Seoul',
-                    'Busan',
-                    'Tokyo',
-                    'Singapore',
-                    'Bangkok',
-                    'Sydney (+HKD1,000)',
-                    'Paris (+HKD2,000)'
-                  ],
-                  warning: '',
-                  plannedTrip: false),
-            ],
-          )),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
+        child: Column(
+          children: [
+            // Expanded(
+            //   child: ListView.builder(
+            //     itemCount: tripList.length,
+            //       itemBuilder: (context, index) {
+            //         return TripCard(
+            //           tripNumber: tripList[index].tripNumber,
+            //           destination: tripList[index].destination,
+            //           destinationList: tripList[index].destinationList,
+            //           warning: tripList[index].warning,
+            //           plannedTrip: tripList[index].plannedTrip,
+            //         );
+            //       }
+            //   ),
+            // ),
+            TripCard(
+                tripNumber: 'Trip 1',
+                destination: destination,
+                destinationList: [
+                  'Seoul',
+                  'Busan',
+                  'Tokyo',
+                  'Singapore',
+                  'Bangkok',
+                  'Sydney (+HKD1,000)',
+                  'Paris (+HKD2,000)'
+                ],
+                warning: 'Reschedule needed',
+                plannedTrip: false),
+            SizedBox(
+              height: 32,
+            ),
+            TripCard(
+                tripNumber: 'Trip 2',
+                destination: destination,
+                destinationList: [
+                  'Seoul',
+                  'Busan',
+                  'Tokyo',
+                  'Singapore',
+                  'Bangkok',
+                  'Sydney (+HKD1,000)',
+                  'Paris (+HKD2,000)'
+                ],
+                warning: '',
+                plannedTrip: false),
+            SizedBox(
+              height: 32,
+            ),
+            TripCard(
+                tripNumber: 'Trip 3',
+                destination: destination,
+                destinationList: [
+                  'Seoul',
+                  'Busan',
+                  'Tokyo',
+                  'Singapore',
+                  'Bangkok',
+                  'Sydney (+HKD1,000)',
+                  'Paris (+HKD2,000)'
+                ],
+                warning: '',
+                plannedTrip: false),
+          ],
+        ),
+      ),
     );
   }
 }

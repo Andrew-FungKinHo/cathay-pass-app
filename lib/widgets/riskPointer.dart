@@ -108,7 +108,7 @@ class riskLevelPointer extends StatelessWidget {
                     fontSize: 12,
                     fontFamily: 'Arial'),
                 offsetUnit: GaugeSizeUnit.factor,
-                markerOffset: -0.6),
+                markerOffset: -0.8),
           ],
         ),
       ],

@@ -102,10 +102,10 @@ class NotificationsPopUp extends StatelessWidget {
                 height: 64,
               ),
             ),
-            TextButton(
-              onPressed: () {},
-              child: Text('Clear'),
-            )
+            // TextButton(
+            //   onPressed: () {},
+            //   child: Text('Clear'),
+            // )
           ],
         ),
       ),

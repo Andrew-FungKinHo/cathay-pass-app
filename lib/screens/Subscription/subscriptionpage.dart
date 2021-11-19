@@ -277,8 +277,12 @@ class _SubscriptionPlansState extends State<SubscriptionPage> {
                     color: AppColors.kPrimaryColor),
                 child: TextButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MenuScreen()));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MenuScreen(),
+                      ),
+                    );
                   },
                   child: Text(
                     'Confirm',
@@ -306,7 +310,7 @@ class _SubscriptionPlansState extends State<SubscriptionPage> {
     Plan(
         planName: 'Luxury',
         price: '11,040',
-        trips: '3-day trips x 3',
+        trips: '4-day trips x 3',
         destination: 'Popular Asian destinations',
         hotelPackage: '5-star hotel package',
         insurance: 'Standard insurance plan',

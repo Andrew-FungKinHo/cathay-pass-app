@@ -122,7 +122,7 @@ class TaskTimeline extends StatelessWidget {
                             children: <Widget>[
                               Container(
                                 constraints:
-                                    BoxConstraints(maxHeight: 50, maxWidth: 50),
+                                    BoxConstraints(maxHeight: 30, maxWidth: 30),
                                 child: riskLevelPointer(
                                   covid.riskLevel.toString(),
                                 ),
