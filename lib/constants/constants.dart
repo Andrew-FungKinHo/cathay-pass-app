@@ -17,7 +17,8 @@ class AppColors {
   static const white = Color(0xFFFFFFFF);
   static const green = Color(0xFF085D63);
   static const fadewhite = Color(0xFFBBCCD6);
-  static const black = Color(0x00000000);
+  static const black = Color(0xFF000000);
+  static const limegreen = Color(0xFFE0F2EF);
 
   static MaterialColor primarySwatch = createMaterialColor(kPrimaryColor);
 }

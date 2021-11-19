@@ -125,7 +125,7 @@ class Body extends StatelessWidget {
               height: 16,
             ),
             Text(
-              'Fung Dean',
+              'Dean Fung',
               style: TextStyle(fontSize: 32, fontFamily: 'Pangram'),
             ),
             SizedBox(

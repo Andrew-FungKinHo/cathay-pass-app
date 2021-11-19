@@ -12,6 +12,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(),
       body: Body(),
+      backgroundColor: AppColors.limegreen,
       bottomNavigationBar: MyBottomNavBar(),
     );
   }
