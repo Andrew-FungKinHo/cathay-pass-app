@@ -1,13 +1,37 @@
 import 'package:cathay_pass_app/constants/constants.dart';
+import 'package:cathay_pass_app/widgets/placeRisk.dart';
+import 'package:cathay_pass_app/widgets/riskPointer.dart';
 import 'package:flutter/material.dart';
 import 'package:timeline_tile/timeline_tile.dart';
+import 'package:http/http.dart' as http;
+import 'dart:core';
+import 'dart:convert';
+
+var cbsa = 36260; // add this line
 
 class TaskTimeline extends StatelessWidget {
   final Map<String, dynamic> detail;
   TaskTimeline(this.detail);
 
+  // start code here
+
+  final String url = "https://api.covidactnow.org/v2/cbsa/" +
+      cbsa.toString() +
+      ".json?apiKey=69ed0fe788624a5c95e562a12315a20b";
+
+  Future<placeRisk> getJsonData() async {
+    var response = await http.get(Uri.parse(url)); // Uri.encodeFull(url)
+    if (response.statusCode == 200) {
+      final convertDataJSON = jsonDecode(response.body);
+      return placeRisk.fromJson(convertDataJSON);
+    } else {
+      throw Exception("try to reload");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    this.getJsonData();
     return Container(
       color: Colors.white,
       padding: EdgeInsets.symmetric(horizontal: 15),
@@ -87,6 +111,29 @@ class TaskTimeline extends StatelessWidget {
                     Icon(
                       Icons.warning_amber_rounded,
                       color: Colors.red,
+                    ),
+                    FutureBuilder(
+                      future: getJsonData(),
+                      builder: (BuildContext context, SnapShot) {
+                        // SnapShot can be changed
+                        if (SnapShot.hasData) {
+                          final covid = SnapShot.data;
+                          return (Row(
+                            children: <Widget>[
+                              Container(
+                                constraints:
+                                    BoxConstraints(maxHeight: 50, maxWidth: 50),
+                                child: riskLevelPointer(
+                                  covid.riskLevel.toString(),
+                                ),
+                              ),
+                            ],
+                          ));
+                        } else if (SnapShot.hasError) {
+                          return Text(SnapShot.error.toString());
+                        } else
+                          return CircularProgressIndicator();
+                      },
                     ),
                   ],
                 ),

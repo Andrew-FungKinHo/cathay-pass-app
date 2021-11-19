@@ -7,8 +7,8 @@ class DatePicker extends StatefulWidget {
 
 class _DatePickerState extends State<DatePicker> {
   final weekList = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  final dayList = ['21', '22', '23', '24', '25', '26', '27'];
-  var selected = 4;
+  final dayList = ['14', '15', '16', '17', '18', '19', '20'];
+  var selected = 5;
   @override
   Widget build(BuildContext context) {
     return Container(

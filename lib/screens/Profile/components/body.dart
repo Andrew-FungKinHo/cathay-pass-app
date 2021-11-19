@@ -77,85 +77,87 @@ class Body extends StatelessWidget {
 
   SliverToBoxAdapter _buildProfileHeader(double screenHeight) {
     return SliverToBoxAdapter(
-        child: Stack(
-      children: [
-        Container(
-          height: 64,
-          padding: const EdgeInsets.all(20.0),
-          decoration: BoxDecoration(
-            color: AppColors.kPrimaryColor,
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(40.0),
-              bottomRight: Radius.circular(40.0),
+      child: Stack(
+        children: [
+          Container(
+            height: 64,
+            padding: const EdgeInsets.all(20.0),
+            decoration: BoxDecoration(
+              color: AppColors.kPrimaryColor,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(40.0),
+                bottomRight: Radius.circular(40.0),
+              ),
             ),
           ),
-        ),
-        Center(
-            child: Column(
-          children: [
-            Container(
-              height: 128,
-              width: 128,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(
-                    "assets/images/pic.png",
+          Center(
+              child: Column(
+            children: [
+              Container(
+                height: 128,
+                width: 128,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                      "assets/images/pic.png",
+                    ),
+                    fit: BoxFit.cover,
                   ),
-                  fit: BoxFit.cover,
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(128.0)),
-                border: Border.all(
-                  color: Colors.white,
-                  width: 6.0,
+                  borderRadius: BorderRadius.all(Radius.circular(128.0)),
+                  border: Border.all(
+                    color: Colors.white,
+                    width: 6.0,
+                  ),
                 ),
               ),
-            ),
-            // Container(
-            //   height: 128,
-            //   width: 128,
-            //   child: ClipOval(
-            //       child: Container(
-            //           height: 116,
-            //           width: 116,
-            //           child: Image.asset("assets/images/pic.png", fit: BoxFit.cover,)
-            //       )
-            //   ),
-            // ),
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              'Dean Fung',
-              style: TextStyle(fontSize: 32, fontFamily: 'Pangram'),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: AppColors.premiumEconClassColor),
-              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 32),
-              child: Text(
-                'Luxury',
-                style: TextStyle(
-                    fontSize: 18,
-                    color: AppColors.white,
-                    fontFamily: 'Pangram'),
+              // Container(
+              //   height: 128,
+              //   width: 128,
+              //   child: ClipOval(
+              //       child: Container(
+              //           height: 116,
+              //           width: 116,
+              //           child: Image.asset("assets/images/pic.png", fit: BoxFit.cover,)
+              //       )
+              //   ),
+              // ),
+              SizedBox(
+                height: 16,
               ),
-            ),
-            SizedBox(
-              height: 32,
-            )
-          ],
-        ))
-      ],
-    ));
+              Text(
+                'Dean Fung',
+                style: TextStyle(fontSize: 32, fontFamily: 'Pangram'),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: AppColors.premiumEconClassColor),
+                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 32),
+                child: Text(
+                  'Luxury',
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: AppColors.white,
+                      fontFamily: 'Pangram'),
+                ),
+              ),
+              SizedBox(
+                height: 32,
+              )
+            ],
+          ))
+        ],
+      ),
+    );
   }
 
   SliverToBoxAdapter _buildProfileBody(double screenHeight, context) {
     return SliverToBoxAdapter(
-      child: Container(
+      child: Expanded(
+        child: Container(
           color: Color(0xFF9BC1BC).withOpacity(0.9),
           child: Column(
             children: [
@@ -323,7 +325,9 @@ class Body extends StatelessWidget {
                 ),
               ),
             ],
-          )),
+          ),
+        ),
+      ),
     );
   }
 }
